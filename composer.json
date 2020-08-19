@@ -1,0 +1,21 @@
+{
+    "name": "zhifang/robot_notice",
+    "description": "robot notice",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "zhiFang",
+            "email": "1401034161@qq.com"
+        }
+    ],
+    "require": {
+        "php": "~7.1"
+    },
+    "homepage": "https://github.com/fang201606/robot-notice",
+    "autoload": {
+        "psr-4": {
+            "ZhiFang\\Notices\\": "src",
+            "ZhiFang\\Notices\\Tests\\": "tests"
+        }
+    }
+}
