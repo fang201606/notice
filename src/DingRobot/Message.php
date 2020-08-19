@@ -4,30 +4,33 @@ namespace ZhiFang\Notices\DingRobot;
 
 use ZhiFang\Notices\DingRobot\Exceptions\MessageTypeNotExistsException;
 
+/**
+ * Class Message
+ * @package ZhiFang\Notices\DingRobot
+ * @method static \ZhiFang\Notices\DingRobot\Messages\Text text()
+ * @method static \ZhiFang\Notices\DingRobot\Messages\Link link()
+ */
 class Message
 {
-    private $type;
     // 'image' ?? 不知道是否支持，待测试
-    private $types = ['text', 'link', 'markdown', 'action_card', 'feed_card'];
-
-    private $data = [];
+    private const TYPES = ['text', 'link', 'markdown', 'actionCard', 'feedCard'];
 
     /**
-     * Message constructor.
-     * @param string $type
+     * @param $name
+     * @param $arguments
+     * @return mixed
      * @throws MessageTypeNotExistsException
      */
-    public function __construct($type)
+    public static function __callStatic($name, $arguments)
     {
-        if (!in_array($type, $this->types)) {
+        if (!in_array($name, self::TYPES)) {
             throw new MessageTypeNotExistsException();
         }
-        $this->type = $type;
-    }
+        $namespace = 'ZhiFang\Notices\DingRobot\Messages\\' . ucfirst($name);
+        if (!class_exists($namespace)) {
+            throw new MessageTypeNotExistsException("{$name}消息类型不存在");
+        }
 
-    public function toArray()
-    {
-        echo '触发规则开始校验';
-        return [];
+        return new $namespace;
     }
 }

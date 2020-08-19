@@ -24,7 +24,7 @@ class DingRobot
 
     public function send(Message $message)
     {
-        print_r($message->toArray());
-        echo 'ding send';
+//        print_r($message->toArray());
+//        echo 'ding send';
     }
 }
