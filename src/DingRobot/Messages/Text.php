@@ -2,7 +2,7 @@
 
 namespace ZhiFang\Notices\DingRobot\Messages;
 
-use ZhiFang\Notices\DingRobot\Exceptions\ParameterErrorException;
+use ZhiFang\Notices\DingRobot\Exceptions\InvalidArgumentException;
 use ZhiFang\Notices\DingRobot\Interfaces\MessageInterface;
 use ZhiFang\Notices\DingRobot\Traits\AtTrait;
 
@@ -30,7 +30,7 @@ class Text implements MessageInterface
 
     /**
      * @return array
-     * @throws ParameterErrorException
+     * @throws InvalidArgumentException
      */
     public function toArray(): array
     {
@@ -40,14 +40,14 @@ class Text implements MessageInterface
 
     /**
      * @return bool
-     * @throws ParameterErrorException
+     * @throws InvalidArgumentException
      */
     public function verify()
     {
         // $message['text']['content'] 存在且不为null
         $content = $this->message['text']['content'];
         if (is_null($content) || empty($content)) {
-            throw new ParameterErrorException('content必须设置且不能为空');
+            throw new InvalidArgumentException('content必须设置且不能为空');
         }
 
         return true;

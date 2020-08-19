@@ -4,7 +4,7 @@ namespace ZhiFang\Notices\DingRobot\Exceptions;
 
 use Throwable;
 
-class ParameterErrorException extends \Exception
+class InvalidArgumentException extends \Exception
 {
     public function __construct($message = "parameter error", $code = 0, Throwable $previous = null)
     {

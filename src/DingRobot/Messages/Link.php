@@ -2,7 +2,7 @@
 
 namespace ZhiFang\Notices\DingRobot\Messages;
 
-use ZhiFang\Notices\DingRobot\Exceptions\ParameterErrorException;
+use ZhiFang\Notices\DingRobot\Exceptions\InvalidArgumentException;
 use ZhiFang\Notices\DingRobot\Interfaces\MessageInterface;
 
 /**
@@ -58,12 +58,12 @@ class Link implements MessageInterface
      * 设置图标
      * @param $pic_url
      * @return $this
-     * @throws ParameterErrorException
+     * @throws InvalidArgumentException
      */
     public function setPicUrl($pic_url)
     {
         if (is_null($pic_url) || empty($pic_url)) {
-            throw new ParameterErrorException('图标不能为空');
+            throw new InvalidArgumentException('图标不能为空');
         }
         $this->message['link']['picUrl'] = $pic_url;
         return $this;
@@ -71,7 +71,7 @@ class Link implements MessageInterface
 
     /**
      * @return array
-     * @throws ParameterErrorException
+     * @throws InvalidArgumentException
      */
     public function toArray(): array
     {
@@ -81,18 +81,18 @@ class Link implements MessageInterface
 
     /**
      * @return bool
-     * @throws ParameterErrorException
+     * @throws InvalidArgumentException
      */
     public function verify()
     {
         if (is_null($this->message['link']['title']) || empty($this->message['link']['title'])) {
-            throw new ParameterErrorException('标题不能为空');
+            throw new InvalidArgumentException('标题不能为空');
         }
         if (is_null($this->message['link']['text']) || empty($this->message['link']['text'])) {
-            throw new ParameterErrorException('内容不能为空');
+            throw new InvalidArgumentException('内容不能为空');
         }
         if (is_null($this->message['link']['messageUrl']) || empty($this->message['link']['messageUrl'])) {
-            throw new ParameterErrorException('跳转地址不能为空');
+            throw new InvalidArgumentException('跳转地址不能为空');
         }
         return true;
     }

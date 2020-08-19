@@ -2,24 +2,24 @@
 
 namespace ZhiFang\Notices\DingRobot\Traits;
 
-use ZhiFang\Notices\DingRobot\Exceptions\ParameterErrorException;
+use ZhiFang\Notices\DingRobot\Exceptions\InvalidArgumentException;
 
 trait AtTrait
 {
     /**
      * @param $at
      * @return $this
-     * @throws ParameterErrorException
+     * @throws InvalidArgumentException
      */
     public function at($at)
     {
         // $at 不能为空
         if (is_null($at) || empty($at)) {
-            throw new ParameterErrorException('[at]参数错误');
+            throw new InvalidArgumentException('[at]参数错误');
         }
         // $at如果是数组，则必须是一维数组
         if (is_array($at) && count($at) !== count($at, 1)) {
-            throw new ParameterErrorException('[at]数组则必须是一维的');
+            throw new InvalidArgumentException('[at]数组则必须是一维的');
         }
 
         // 获取到已经存在的号码
