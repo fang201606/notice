@@ -8,18 +8,23 @@ try {
     // init
     $ding = new \ZhiFang\Notices\DingRobot\DingRobot($access_token);
     // construct message
-    $message = \ZhiFang\Notices\DingRobot\Message::link();
+    $message = \ZhiFang\Notices\DingRobot\Message::text();
 
-    $message->setContent('我his文本啊')
-        ->setTitle('title')
-        ->setMessageUrl('2121');
+//    $message->setTitle('title')
+//        ->setContent('con121')
+////        ->setSingle('yuedu', 'nihao1')
+////        ->addBtn('同意', '1')
+////        ->addBtn('拒绝', '2')
+//        ->setBtnOrientation(1);
+//    $message->addLinks('0', '1', '2');
+    $message->setContent('我你是');
 
 //        ->at(['15', '16', 16]);
 //    $message->at(true);
 
-    print_r($message->toArray());
 
-//    $ding->send($message);
+    $message1 = [];
+    $ding->send($message);
 } catch (Exception $e) {
     echo $e->getMessage();
 }

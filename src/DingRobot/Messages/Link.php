@@ -62,7 +62,7 @@ class Link implements MessageInterface
      */
     public function setPicUrl($pic_url)
     {
-        if (is_null($pic_url) || empty($pic_url)) {
+        if (blank($pic_url)) {
             throw new InvalidArgumentException('图标不能为空');
         }
         $this->message['link']['picUrl'] = $pic_url;
@@ -83,15 +83,15 @@ class Link implements MessageInterface
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function verify()
+    public function verify(): bool
     {
-        if (is_null($this->message['link']['title']) || empty($this->message['link']['title'])) {
+        if (blank($this->message['link']['title'])) {
             throw new InvalidArgumentException('标题不能为空');
         }
-        if (is_null($this->message['link']['text']) || empty($this->message['link']['text'])) {
+        if (blank($this->message['link']['text'])) {
             throw new InvalidArgumentException('内容不能为空');
         }
-        if (is_null($this->message['link']['messageUrl']) || empty($this->message['link']['messageUrl'])) {
+        if (blank($this->message['link']['messageUrl'])) {
             throw new InvalidArgumentException('跳转地址不能为空');
         }
         return true;

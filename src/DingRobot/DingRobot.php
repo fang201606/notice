@@ -22,9 +22,12 @@ class DingRobot
         $this->access_token = $access_token;
     }
 
-    public function send(Message $message)
+    /**
+     * @param \ZhiFang\Notices\DingRobot\Interfaces\MessageInterface $message
+     */
+    public function send($message)
     {
-//        print_r($message->toArray());
-//        echo 'ding send';
+        print_r($message->toArray());
+        echo 'ding send';
     }
 }

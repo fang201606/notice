@@ -42,11 +42,10 @@ class Text implements MessageInterface
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function verify()
+    public function verify(): bool
     {
         // $message['text']['content'] 存在且不为null
-        $content = $this->message['text']['content'];
-        if (is_null($content) || empty($content)) {
+        if (blank($this->message['text']['content'])) {
             throw new InvalidArgumentException('content必须设置且不能为空');
         }
 

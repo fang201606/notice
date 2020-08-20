@@ -16,6 +16,9 @@
         "psr-4": {
             "ZhiFang\\Notices\\": "src",
             "ZhiFang\\Notices\\Tests\\": "tests"
-        }
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
     }
 }

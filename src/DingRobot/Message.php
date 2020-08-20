@@ -9,6 +9,9 @@ use ZhiFang\Notices\DingRobot\Exceptions\MessageTypeNotExistsException;
  * @package ZhiFang\Notices\DingRobot
  * @method static \ZhiFang\Notices\DingRobot\Messages\Text text()
  * @method static \ZhiFang\Notices\DingRobot\Messages\Link link()
+ * @method static \ZhiFang\Notices\DingRobot\Messages\Markdown markdown()
+ * @method static \ZhiFang\Notices\DingRobot\Messages\FeedCard feedCard()
+ * @method static \ZhiFang\Notices\DingRobot\Messages\ActionCard actionCard()
  */
 class Message
 {
