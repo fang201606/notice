@@ -26,14 +26,16 @@ try {
     // init
     $ding = new \ZhiFang\Notices\DingRobot\DingRobot($config);
     // construct message
-    $message = \ZhiFang\Notices\DingRobot\Message::image();
+    $message = \ZhiFang\Notices\DingRobot\Message::feedCard();
 
-    $message->setPicUrl('https://profile.csdnimg.cn/5/D/D/3_qq_36427770');
-//    $message->setTitle('title')->setContent('con121')->setMessageUrl('2121');
+//    $message->setContent('')->at(1);
+
+//    $message->setPicUrl('https://profile.csdnimg.cn/5/D/D/3_qq_36427770');
+//    $message->setTitle('title')->setContent('con121')->setMessageUrl('2121')->setPicUrl('');
 //    $message->setTitle('as')->setContent('sa');
-//    $message->setTitle('1')->setContent('121')->setSingle('all', 'http://www.baidu.com');
+//    $message->setTitle('1')->setContent('121')->setSingle('all', 'http://www.baidu.com')->addBtn('', '');
 //    $message->setTitle('1')->setContent('121')->addBtn('1', '2')->addBtn('2', '2')->setBtnOrientation(false);
-//    $message->addLinks('1', '2', '2')->addLinks(2,3,4);
+    $message->addLinks('1', '2', '2')->addLinks(2,3,4);
 
     $ding
         ->with(['business', 'api'])
