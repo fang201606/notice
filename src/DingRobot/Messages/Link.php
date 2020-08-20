@@ -13,7 +13,7 @@ use ZhiFang\Notices\DingRobot\Interfaces\MessageInterface;
 class Link implements MessageInterface
 {
     private $message = [
-        'mestype' => 'link',
+        'msgtype' => 'link',
         'link' => [
             'title' => null,
             'text' => null,

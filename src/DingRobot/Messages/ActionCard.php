@@ -8,7 +8,7 @@ use ZhiFang\Notices\DingRobot\Interfaces\MessageInterface;
 class ActionCard implements MessageInterface
 {
     private $message = [
-        'mestype' => 'actionCard',
+        'msgtype' => 'actionCard',
         'actionCard' => [
             'title' => null,
             'text' => null

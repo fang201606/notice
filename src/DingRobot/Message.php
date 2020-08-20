@@ -12,11 +12,11 @@ use ZhiFang\Notices\DingRobot\Exceptions\MessageTypeNotExistsException;
  * @method static \ZhiFang\Notices\DingRobot\Messages\Markdown markdown()
  * @method static \ZhiFang\Notices\DingRobot\Messages\FeedCard feedCard()
  * @method static \ZhiFang\Notices\DingRobot\Messages\ActionCard actionCard()
+ * @method static \ZhiFang\Notices\DingRobot\Messages\Image image()
  */
 class Message
 {
-    // 'image' ?? 不知道是否支持，待测试
-    private const TYPES = ['text', 'link', 'markdown', 'actionCard', 'feedCard'];
+    private const TYPES = ['text', 'link', 'markdown', 'actionCard', 'feedCard', 'image'];
 
     /**
      * @param $name

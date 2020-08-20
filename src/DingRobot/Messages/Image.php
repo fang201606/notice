@@ -7,24 +7,23 @@ use ZhiFang\Notices\DingRobot\Interfaces\MessageInterface;
 use ZhiFang\Notices\DingRobot\Traits\AtTrait;
 
 /**
- * Class Text
+ * Class Image
  * @package ZhiFang\Notices\DingRobot\Messages
- * @link https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq/e9d991e2
  */
-class Text implements MessageInterface
+class Image implements MessageInterface
 {
     use AtTrait;
 
     private $message = [
-        'msgtype' => 'text',
-        'text' => [
-            'content' => null
+        'msgtype' => 'image',
+        'image' => [
+            'picURL' => null
         ]
     ];
 
-    public function setContent($content)
+    public function setPicUrl($pic_url)
     {
-        $this->message['text']['content'] = $content;
+        $this->message['image']['picURL'] = $pic_url;
         return $this;
     }
 
@@ -44,9 +43,8 @@ class Text implements MessageInterface
      */
     public function verify(): bool
     {
-        // $message['text']['content'] 存在且不为null
-        if (blank($this->message['text']['content'])) {
-            throw new InvalidArgumentException('content必须设置且不能为空');
+        if (blank($this->message['image']['picURL'])) {
+            throw new InvalidArgumentException('图片地址必须设置且不能为空');
         }
 
         return true;
