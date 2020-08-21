@@ -16,8 +16,6 @@ use ZhiFang\Notices\DingRobot\Interfaces\MessageInterface;
  */
 class DingRobot
 {
-    private $ssl_verify = true;
-    private $timeout = 2.0;
     private $robots = [];
     private $with = [];
 
@@ -57,7 +55,11 @@ class DingRobot
         return $this;
     }
 
-    public function send(MessageInterface $message)
+    /**
+     * @param $message
+     * @throws GatewayFailedException
+     */
+    public function notify($message)
     {
         $message = $message->toArray();
         $results = [];
@@ -74,7 +76,7 @@ class DingRobot
                 ];
             } else {
                 try {
-                    $this->dispatch($message, $this->robots[$key]);
+                    (new Dispatcher)->dispatch($this->robots[$key], $message);
                 } catch (InvalidArgumentException $e) {
                     $results[$key] = [
                         'gateway' => $key,
@@ -89,53 +91,26 @@ class DingRobot
             }
         }
         if (!blank($results)) {
-//            print_r($results);
             throw new GatewayFailedException($results);
         }
     }
 
-
     /**
-     * @param array $message
-     * @param array $robot ['access_token' => '必填', 'secret' => '可选']
+     * @param $robot
+     * @param MessageInterface $message
      * @return bool
      * @throws InvalidArgumentException
      * @throws SendErrorException
      */
-    private function dispatch($message, $robot)
+    public static function send($robot, $message)
     {
-        $access_token = $robot['access_token'] ?? null;
-        $secret = $robot['secret'] ?? null;
-
-        if (blank($robot['access_token'])) {
-            throw new InvalidArgumentException('机器人必传');
+        if (!isset($robot['token']) || blank($robot['token'])) {
+            throw new InvalidArgumentException('token必填');
         }
-
-        $client = new HttpClient([
-            'base_uri' => 'https://oapi.dingtalk.com',
-            'verify' => (isset($robot['ssl_verify']) && !blank($robot['ssl_verify'])) ? $robot['ssl_verify'] : $this->ssl_verify,
-            'timeout' => (isset($robot['timeout']) && !blank($robot['timeout'])) ? $robot['timeout'] : $this->timeout
-        ]);
-        $uri = '/robot/send?access_token=' . $access_token;
-        if (!blank($secret)) {
-            $timestamp = intval(microtime(true) * 1000);
-            $stringToSign =  $timestamp . "\n" . $secret;
-            $sign = hash_hmac('sha256',  $stringToSign, $secret, true);
-            $sign = urlencode(base64_encode($sign));
-            $uri .= "&timestamp={$timestamp}&sign={$sign}";
-        }
-
-        try {
-            $response = $client->post($uri, [
-                'json' => $message
-            ]);
-            $response = json_decode($response->getBody(), true);
-            if ($response['errcode'] !== 0) {
-                throw new SendErrorException($response['errmsg'], $response['errcode']);
-            }
-            return true;
-        } catch (GuzzleException $e) {
-            throw new SendErrorException($e->getMessage(), $e->getCode());
+        $robot['access_token'] = $robot['token'];
+        $enabled = $robot['enabled'] ?? false;
+        if ($enabled) {
+            return (new Dispatcher)->dispatch($robot, $message->toArray());
         }
     }
 }

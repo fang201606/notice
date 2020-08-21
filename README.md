@@ -57,7 +57,13 @@ $message->addLinks('信息文本', '点击单条信息到跳转链接', '单条�
 ```php
 $ding = new DingRobot($config);
 $ding->with('key1')
-    ->send($message);
+    ->notify($message);
+```
+#### 使用独立配置的方式
+`$robot` 参考上面的[配置](#配置)中`$config['gateways']['key1']`的具体机器人配置。 `$message` 参考上面的 [构建消息](#构建消息)
+
+```php
+DingRobot::send($robot, $message);
 ```
 
 ### 异常处理
